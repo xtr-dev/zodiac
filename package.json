@@ -22,8 +22,8 @@
     "websocket",
     "typesafe"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": "@xtr-dev",
+  "license": "UNLICENSED",
   "dependencies": {
     "zod": "^3.22.4"
   },
