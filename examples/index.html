@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiac Todo Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .todo-container {
+            width: 100%;
+            max-width: 500px;
+            height: 700px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .todo-header {
+            background: #667eea;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .todo-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .todo-status {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .status-indicator.connected { background: #10b981; }
+        .status-indicator.disconnected { background: #ef4444; }
+        .status-indicator.connecting { background: #f59e0b; }
+        
+        .connection-panel {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
+        }
+        
+        .connection-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .connect-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .connect-btn:hover:not(:disabled) {
+            background: #5a67d8;
+        }
+        
+        .connect-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .todos-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8fafc;
+        }
+        
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+        
+        .todo-item:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .todo-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        
+        .todo-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #d1d5db;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .todo-checkbox.checked {
+            background: #667eea;
+            border-color: #667eea;
+            color: white;
+        }
+        
+        .todo-text {
+            flex: 1;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+        
+        .todo-delete {
+            padding: 0.5rem;
+            color: #ef4444;
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+        
+        .todo-item:hover .todo-delete {
+            opacity: 1;
+        }
+        
+        .todo-delete:hover {
+            background: #fee2e2;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #6b7280;
+            padding: 2rem;
+            font-style: italic;
+        }
+        
+        .todo-input-container {
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .todo-input-form {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .todo-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 0.875rem;
+        }
+        
+        .todo-input:focus {
+            border-color: #667eea;
+        }
+        
+        .add-btn {
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .add-btn:hover:not(:disabled) {
+            background: #5a67d8;
+        }
+        
+        .add-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 480px) {
+            .todo-container {
+                height: 100vh;
+                max-width: 100%;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-container">
+        <div class="todo-header">
+            <div class="todo-title">Zodiac Todo List</div>
+            <div class="todo-status">
+                <span id="statusIndicator" class="status-indicator disconnected"></span>
+                <span id="statusText">Disconnected</span>
+            </div>
+        </div>
+        
+        <div id="connectionPanel" class="connection-panel">
+            <input type="text" id="wsUrl" class="connection-input" 
+                   value="ws://localhost:8081" 
+                   placeholder="WebSocket URL">
+            <button id="connectBtn" class="connect-btn">Connect to Sync</button>
+        </div>
+        
+        <div id="todosContainer" class="todos-container">
+            <div class="empty-state" id="emptyState">
+                Welcome to Zodiac Todo List! Connect to start syncing your todos.
+            </div>
+        </div>
+        
+        <div id="todoInputContainer" class="todo-input-container hidden">
+            <form id="todoForm" class="todo-input-form">
+                <input type="text" id="todoInput" class="todo-input" 
+                       placeholder="Add a new todo..." autocomplete="off">
+                <button type="submit" id="addBtn" class="add-btn" disabled>Add</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./demo.ts"></script>
+</body>
+</html>

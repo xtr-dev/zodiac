@@ -1,0 +1,32 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "theme": "default",
+  "name": "Zodiac API Documentation",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "hideGenerator": false,
+  "sort": ["source-order"],
+  "categorizeByGroup": true,
+  "defaultCategory": "Other",
+  "categoryOrder": [
+    "Channels",
+    "Message Definition",
+    "Types",
+    "Configuration",
+    "*"
+  ],
+  "plugin": ["typedoc-plugin-mermaid"],
+  "validation": {
+    "notExported": false,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "treatWarningsAsErrors": false,
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}

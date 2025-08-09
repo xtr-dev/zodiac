@@ -1,0 +1,41 @@
+{
+  "name": "@xtr-dev/zodiac",
+  "version": "0.0.1",
+  "description": "Zodiac - Type-safe WebSocket messaging with Zod validation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node --test",
+    "example:backend": "npm run build && tsx examples/server.ts",
+    "example:frontend": "vite examples --host",
+    "example": "concurrently \"npm run example:backend\" \"npm run example:frontend\"",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch",
+    "docs:serve": "npx http-server docs -p 8080 -o"
+  },
+  "keywords": [
+    "typescript",
+    "zod",
+    "messaging",
+    "websocket",
+    "typesafe"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/ws": "^8.5.10",
+    "concurrently": "^9.2.0",
+    "tsx": "^4.20.3",
+    "typedoc": "^0.28.9",
+    "typedoc-plugin-mermaid": "^1.12.0",
+    "typescript": "^5.3.3",
+    "vite": "^7.1.1",
+    "ws": "^8.16.0"
+  }
+}
