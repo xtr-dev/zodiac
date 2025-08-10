@@ -1,7 +1,7 @@
 # Zodiac
 
 [![npm version](https://badge.fury.io/js/@xtr-dev%2Fzodiac.svg)](https://badge.fury.io/js/@xtr-dev%2Fzodiac)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Documentation](https://img.shields.io/badge/docs-typedoc-blue)](https://xtr-dev.github.io/zodiac/)
 [![License](https://img.shields.io/badge/license-UNLICENSED-red)](./README.md)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@xtr-dev/zodiac)](https://bundlephobia.com/package/@xtr-dev/zodiac)
