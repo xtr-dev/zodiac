@@ -176,4 +176,4 @@ npm run docs:serve  # Serve docs at http://localhost:8080
 
 ## License
 
-UNLICENSED - All rights reserved
+UNLICENSED - No rights reserved
