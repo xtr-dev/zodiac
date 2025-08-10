@@ -1,5 +1,11 @@
 # Zodiac
 
+[![npm version](https://badge.fury.io/js/@xtr-dev%2Fzodiac.svg)](https://badge.fury.io/js/@xtr-dev%2Fzodiac)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Documentation](https://img.shields.io/badge/docs-typedoc-blue)](https://xtr-dev.github.io/zodiac/)
+[![License](https://img.shields.io/badge/license-UNLICENSED-red)](./README.md)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@xtr-dev/zodiac)](https://bundlephobia.com/package/@xtr-dev/zodiac)
+
 Type-safe WebSocket messaging with Zod validation. A lean, modern library for real-time communication.
 
 ## Features
@@ -85,7 +91,7 @@ channel.on(userMessage, async (data) => {
 await channel.connect('ws://localhost:8080');
 ```
 
-Zodiac also supports **WebRTC peer-to-peer** communication with `PeerChannel` for direct browser-to-browser messaging. See the [API documentation](https://your-username.github.io/zodiac) for details.
+Zodiac also supports **WebRTC peer-to-peer** communication with `PeerChannel` for direct browser-to-browser messaging. See the [API documentation](https://xtr-dev.github.io/zodiac/) for details.
 
 ## Interactive Demo
 
@@ -128,9 +134,37 @@ await channel.sendMessage(userMsg, {
 });
 ```
 
+## API Reference
+
+### `defineMessage(id, schema)`
+
+Creates a type-safe message definition with validation schema:
+
+```typescript
+const myMessage = defineMessage('my-message', z.object({
+  content: z.string(),
+  priority: z.enum(['low', 'high'])
+}));
+
+// Returns: { id: string, schema: ZodSchema, messageSchema: ZodObject }
+```
+
+### Channel Methods
+
+All channels (`BrowserChannel`, `NodeChannel`, `PeerChannel`) share the same core API:
+
+- `channel.on(definition, handler)` - Listen for messages with full type safety
+- `channel.off(definition, handler)` - Remove message listeners  
+- `channel.sendMessage(definition, data)` - Send validated messages
+- `channel.connect(url)` - Establish connection
+- `channel.disconnect()` - Close connection
+- `channel.isOpen()` - Check connection status
+
+See the [full API documentation](https://xtr-dev.github.io/zodiac/) for complete details.
+
 ## 📖 Documentation
 
-- **[API Documentation](https://your-username.github.io/zodiac)** - Complete TypeDoc-generated API docs
+- **[API Documentation](https://xtr-dev.github.io/zodiac/)** - Complete TypeDoc-generated API docs
 - **[Examples](./examples/)** - Live demos and usage examples  
 - **Local docs**: Run `npm run docs` to generate docs locally
 
@@ -142,4 +176,4 @@ npm run docs:serve  # Serve docs at http://localhost:8080
 
 ## License
 
-None
+UNLICENSED - All rights reserved

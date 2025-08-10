@@ -1,6 +1,6 @@
 {
   "name": "@xtr-dev/zodiac",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Zodiac - Type-safe WebSocket messaging with Zod validation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
